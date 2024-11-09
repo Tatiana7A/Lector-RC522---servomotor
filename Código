@@ -10,14 +10,14 @@ MFRC522 mfrc522(SS_PIN, RST_PIN); // Crear instancia del lector RFID
 Servo miServo;  // Instancia del servomotor
 
 // Definir el UID de la tarjeta que habilita el servo
-byte UID_Autorizar[] = { 0x3B, 0x5, 0x28, 0xB }; // Cambia estos valores con el UID de tu tarjeta
+byte UID_Autorizar[] = { 0x39, 0x5A, 0x53, 0xD }; // Cambia estos valores con el UID de tu tarjeta
 //1A 49 E1 2B
 void setup() {
   Serial.begin(9600);     // Iniciar comunicación serial
   SPI.begin();            // Iniciar SPI
   mfrc522.PCD_Init();     // Iniciar el RC522
   miServo.attach(SERVO_PIN); // Conectar el servomotor al pin 6
-  miServo.write(0);       // Posición inicial del servomotor (puedes ajustar este valor)
+  miServo.write(180);       // Posición inicial del servomotor (puedes ajustar este valor)
   Serial.println("Acerca la tarjeta al lector...");
 }
 
@@ -43,7 +43,7 @@ void loop() {
         Serial.println("UID autorizado! Activando servomotor...");
         miServo.write(90);  // Mueve el servo a 90 grados (ajusta según tu necesidad)
         delay(2000);        // Mantén el servo activado durante 2 segundos
-        miServo.write(0);   // Regresa el servo a la posición inicial
+        miServo.write(180);   // Regresa el servo a la posición inicial
       } else {
         Serial.println("UID no autorizado.");
       }
